@@ -1,0 +1,290 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Fossil Tz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+</head>
+
+<body class="h-screen  bg-gray-900 ">
+
+  <!-- Navbar  -->
+
+  <header class="text-gray-400 bg-gray-900 body-font  transition-colors ">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+        <img class="invert w-20" src="./Images/Icon/Logo.png" alt="">
+
+      </a>
+      <nav id="pageSwitches" class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+        <button class="mr-5 transition-colors hover:bg-blue-300 hover:text-white p-2 rounded-md navButtons"
+          id="DigitalClock">Digital
+          Clock</button>
+        <button class="mr-5 transition-colors hover:bg-blue-500 hover:text-white p-2 rounded-md navButtons"
+          id="AnalogClock">Analog
+          Clock</button>
+        <button class="mr-5 transition-colors hover:bg-blue-400 hover:text-white p-2 rounded-md navButtons"
+          id="Weather">Weather</button>
+        <button class="mr-5 transition-colors hover:bg-blue-300 hover:text-white p-2 rounded-md navButtons"
+          id="ToDoList">To-Do
+          List</button>
+      </nav>
+
+    </div>
+
+  </header>
+
+  <div id="alert"
+    class=" hidden p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 fixed top-0 w-full transition ease-in-out 3s"
+    role="alert">
+    <span class="font-medium">Make Sure You Entered the Write Input!</span>
+  </div>
+
+
+  <!-- Main Page -->
+  <section class="text-gray-400  body-font flex ">
+    <div class="container px-5  mx-auto flex flex-col items-center justify-center  ">
+      <!-- Digital  clock  -->
+      <div class="  mt-20 mb-20 pageSwitches border" id="DigitalClock">
+        <div class="flex flex-col items-center justify-center pages border h-full mb-7">
+          <div class="flex flex-col text-center w-full mb-7  ">
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">Fossil Digital Clock</h1>
+            <div id="toggle">
+              <label class="inline-flex items-center cursor-pointer">
+                <input type="checkbox" value="true" class="sr-only peer" id="toggelTimeFormate" onclick=timeFormate()>
+                <div
+                  class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                </div>
+                <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">24hr</span>
+              </label>
+            </div>
+          </div>
+
+          <div class=" flex flex-col items-center justify-center pages border w-3/4 ">
+            <div class="flex items-center justify-around text-lg font-bold w-4/5  ">
+              <div class=" bg-white w-28 h-10 rounded-md flex items-center justify-center">
+
+                <h1 class="text-black" id="hour"></h1>
+                <p>h</p>
+              </div>
+              <span>:</span>
+              <div class=" bg-white w-28 h-10 rounded-md flex items-center justify-center">
+                <h1 class="text-black" id="minute"></h1>
+                <p>m</p>
+              </div>
+              <span>:</span>
+              <div class="bg-white w-28 h-10 rounded-md flex items-center justify-center">
+                <h1 class="text-black" id="second"></h1>
+                <p>S</p>
+              </div>
+              <span>:</span>
+              <div class="bg-blue-600 rounded-md">
+                <h1 id="timeZone" class="w-28 h-10 rounded-md flex items-center justify-center text-white "></h1>
+              </div>
+
+            </div>
+            <div id="dateContainer"
+              class="flex w-96   mt-6 font-bold text-white justify-around items-center font-dancing">
+              <h1 id="week"></h1>
+              <span>-</span>
+              <h1 id="date"></h1>
+              <span>-</span>
+              <h1 id="month"></h1>
+              <span>-</span>
+              <h1 id="year"></h1>
+
+            </div>
+          </div>
+
+
+          <div class="alarm flex flex-col mt-8 justify-around items-center w-3/4 h-32">
+            <div>
+              <h1 class="text-lg">Set Alarm</h1>
+            </div>
+            <form class="max-w-sm  flex justify-around items-center h-20    w-3/4 ">
+              <input type="number" id="alarmHour" aria-describedby="helper-text-explanation"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-24 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Hour" required />
+
+              <input type="number" id="alarmMinute" aria-describedby="helper-text-explanation"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-24 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Minutes" required />
+              <input type="text" id="am/pm" aria-describedby="helper-text-explanation"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-14 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Am/Pm" required />
+
+              <div class="flex flex-col">
+                <button type="button"
+                  class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.4 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                  id="alarmSet" onclick=setAlarm()>Set</button>
+                <button type="button"
+                  class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.4 me-2 mb-0 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                  id="alarmStop">Stop</button>
+
+              </div>
+
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Analog Clock -->
+      <div class="hidden pageSwitches mt-20 mb-20  h-96" id="AnalogClock">
+        <div class="flex h-full">
+
+          <div
+            class="relative    bg-[url('./Images/Images/AnalogClock3.png')] h-full w-3/6 bg-center bg-no-repeat bg-contain flex justify-center items-center ">
+            <div
+              class="hand hour-hand origin-bottom rotate-0 w-2 h-24  bg-black border-t-8 absolute left-3/6 bottom-2/4"
+              id="hourHand"></div>
+            <div
+              class="hand minute-hand origin-bottom rotate-0   w-1.5 h-32  bg-black border-t-8 absolute left-3/6 bottom-2/4"
+              id="minuteHand"></div>
+            <div class="hand second-hand origin-bottom  w-1 h-36  bg-black border-t-8 absolute left-3/6 bottom-2/4"
+              id="secondHand"></div>
+            <div class="h-6 w-6 absolute bg-black rounded-full "></div>
+
+          </div>
+
+          <div class=" w-3/6 flex justify-center items-center flex-col p-5 bg-slate-700 rounded-md">
+            <img src="./Images/Icon/Logo.png" class="invert w-52 " alt="">
+            <p>The clock is one of the oldest human inventions, meeting the need to measure intervals of time shorter
+              than the natural units such as the day, the lunar month, and the year. Devices operating on several
+              physical processes have been used over the millennia.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weather -->
+      <div class=" hidden pageSwitches" id="Weather">
+        <h1>Weather</h1>
+      </div>
+
+      <!-- To-Do-List -->
+      <div class=" hidden toDoList-main-container w-full  rounded-md pageSwitches overflow-hidden" id="ToDoList">
+        <div class=" main-Container-Header h-14 bg-blue-600 text-white flex justify-between items-center">
+          <div class="leftHeader logo flex justify-center items-center h-fit  w-1/4">
+            <img src="./images/Icon/microsoft.png" class="w-20" alt="">
+            <h1>To Do</h1>
+          </div>
+          <div class=" todoList-search bottom-Header text-black w-2/4 h-full flex items-center justify-center">
+            <input type="search" id="searchTodo" class="w-96">
+          </div>
+          <div class="rightHeader tools w-1/4 ">
+            <i class="fa-solid fa-gear"></i>
+            <i class="fa-solid fa-user"></i>
+          </div>
+        </div>
+
+
+     
+          <div class="toDoList-rightConainer-AddToDo  bg-white w-full h-full  text-black  ">
+           <div class=" contentHeader border-b-2 h-20 flex items-center p-6">
+            <h1><b>My Day</b></h1>
+            <p class="mx-6" id="todoWeek">Week</p>
+            <p class="mx-6" id="todoDate">date</p>
+            <p id="todoMonth">Month</p>
+           </div>
+           <div class="p-3 flex items-center shadow-lg taskField">
+           
+            <input type="text" class=" border-none p-2 w-full" placeholder="Add a task" id="taskInput">
+            <i  class=" mx-2 fa-solid fa-plus cursor-pointer text-xl hover:text-blue-500" id="addTaskButton"></i>
+           </div>
+           <div class="taskStore p-3 mt-1 flex items-start flex-col overflow-y-scroll scroll-smooth h-80 " id="savedTask">
+          
+           </div>
+          </div>
+        </div>
+        <div id="todoDeleteConfirmation" class="todo-delete-confirmation absolute hidden">
+
+          <div class="flex flex-col justify-center items-center max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
+            <h1 class=" text-lg font-medium">Are your sure want to delete this Todo?</h1>
+            <div class="mt-5">
+              <button type="button" id="confirmationYes"  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Yes</button>
+
+              <button type="button" id="confirmationNo"  class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">No.</button>
+            </div>
+       
+
+
+
+          </div>
+            
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- 
+  <footer class="text-gray-400 bg-gray-900 body-font">
+    <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+      <a class="flex title-font font-medium items-center md:justify-start justify-center text-white"
+        href="https://www.fossil.com/en-in/watches/?gclid=CjwKCAjwh4-wBhB3EiwAeJsppIPnPIpQXT9Uvcbb_-2E9GwDDihzem31b1Hrw4QofzR8METldCONkBoChjIQAvD_BwE&gclsrc=aw.ds"
+        target="_blank">
+        <img src="./Images/Icon/Logo.png" class="w-20 invert " alt="">
+
+      </a>
+      <p class="text-sm text-gray-400 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-800 sm:py-2 sm:mt-0 mt-4">© 2020
+        Tailblocks —
+        <a href="https://twitter.com/knyttneve" class="text-gray-500 ml-1" target="_blank"
+          rel="noopener noreferrer">@knyttneve</a>
+      </p>
+      <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+        <a class="text-gray-400">
+          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+            viewBox="0 0 24 24">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-400">
+          <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+            viewBox="0 0 24 24">
+            <path
+              d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+            </path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-400">
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            class="w-5 h-5" viewBox="0 0 24 24">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+          </svg>
+        </a>
+        <a class="ml-3 text-gray-400">
+          <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0"
+            class="w-5 h-5" viewBox="0 0 24 24">
+            <path stroke="none"
+              d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+            <circle cx="4" cy="4" r="2" stroke="none"></circle>
+          </svg>
+        </a>
+      </span>
+    </div>
+  </footer> -->
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://kit.fontawesome.com/7cc32474be.js" crossorigin="anonymous"></script>
+  <script src="Project1.js"></script>
+</body>
+
+</html>
