@@ -5,7 +5,7 @@ let displayHour = document.getElementById('hour')
 let displayMinute = document.getElementById('minute')
 let displaySecond = document.getElementById('second')
 let timeZone = document.getElementById('timeZone')
-let toggleTimeFormat = document.getElementById('toggelTimeFormate')
+let toggleTimeFormat = document.getElementById('toggleTimeFormat')
 let day = document.getElementById('week')
 let date = document.getElementById('date')
 let month = document.getElementById('month')
@@ -16,22 +16,23 @@ let timePeriod = document.getElementById('am/pm')
 let alert = document.getElementById('alert')
 
 
+
+
 // digital Clock program
-
-
-let dateTime = new Date()
 
 let digitalClock = () => {
     setInterval(() => {
-        dateTime;
-        let hour = dateTime.getHours()
-        let minute = dateTime.getMinutes()
-        let second = dateTime.getSeconds()
-        analogClock(second, minute, hour)
-        toggle(hour, minute, second)
+        let dateTime = new Date()
+        let obj={
+            hour:dateTime.getHours(),
+            minute:dateTime.getMinutes(),
+            second:dateTime.getSeconds()
+        }
+        analogClock(obj.second, obj.minute, obj.hour)
+        toggle(obj.hour, obj.minute, obj.second)
         // ringAlarm(hour, minute)
-        displayMinute.innerText = minute;
-        displaySecond.innerText = second;
+        displayMinute.innerText = obj.minute;
+        displaySecond.innerText = obj.second;
         day.innerText = weekArr[dateTime.getDay() - 1]
         date.innerText = dateTime.getDate()
         month.innerText = monthArr[dateTime.getMonth()]
@@ -74,48 +75,6 @@ let timeFormate = () => {
 
 
 
-// Alarm Feature:
-// let alarmHour = document.getElementById('alarmHour')
-// let alarmMinute = document.getElementById('alarmMinute')
-// let stopAlarm = document.getElementById('alarmStop')
-// let alarmAudio = new Audio('./sound/alarm1.mp3')
-// let getAlarm = '';
-
-
-// let setAlarm = () => {
-//     if (alarmHour.value != '' && alarmMinute.value != '' && timePeriod != '' && alarmHour.value <= 24 && alarmMinute.value <= 60) {
-//         localStorage.setItem('Alarm', [alarmHour.value, alarmMinute.value, timePeriod.value])
-//         alarmHour.value = ''
-//         alarmMinute.value = ''
-//     } else {
-//         alert.style.display = 'block';
-//         setTimeout(() => {
-//             alert.style.display = 'none'
-//             alert.firstElementChild.innerText = "Make Sure You Entered the Write Input!"
-//         }, 3000);
-//     }
-
-
-// }
-
-// let ringAlarm = (h, m) => {
-//     if (h > 12) {
-//         h - 12
-//     }
-
-//     getAlarm = localStorage.getItem('Alarm')
-//     let hourString = JSON.stringify(h)
-//     let minuteString = JSON.stringify(m)
-//     if (getAlarm.startsWith(hourString) && getAlarm.endsWith(minuteString)) {
-//         alarmAudio.play()
-//     }
-// }
-
-// stopAlarm.addEventListener('click', () => {
-//     alarmAudio.pause()
-//     console.log("Audio paused")
-// })
-
 
 let digitalClockPage = document.getElementById('DigitalClock')
 let weatherPage = document.getElementById('Weather')
@@ -124,16 +83,18 @@ let pageSwitches = document.getElementsByClassName('navButtons')
 let pageSwitches2 = document.getElementsByClassName('pageSwitches')
 let pages = document.getElementsByClassName('pages')
 
-console.log("This is the consolelog")
+
 // Page Switches
 
 // Iterate over each element in the pageSwitches NodeList and attach a click event listener to it
 Array.from(pageSwitches).forEach((element) => {
     element.addEventListener('click', () => {
         // Call pageSwitchFunc passing the clicked element
+        
         pageSwitchFunc(element)
     })
 })
+
 
 // Function to switch pages or elements based on the clicked element
 let pageSwitchFunc = (e) => {
@@ -194,7 +155,6 @@ let analogClock = (second, minute, hour) => {
 
 // To-Do-List
 let inputTask = document.getElementById('taskInput')
-console.log(inputTask.value)
 let addTaskButton = document.getElementById('addTaskButton')
 let savedTask = document.getElementById('savedTask')
 let todoWeek = document.getElementById('todoWeek')
