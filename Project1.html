@@ -50,7 +50,7 @@
   <section class="text-gray-400  body-font flex ">
     <div class="container px-5  mx-auto flex flex-col items-center justify-center  ">
       <!-- Digital  clock  -->
-      <div class="  mt-20 mb-20 pageSwitches " id="DigitalClock">
+      <div class=" hidden mt-20 mb-20 pageSwitches " id="DigitalClock">
         <div class="flex flex-col items-center justify-center pages  h-full mb-7">
           <div class="flex flex-col text-center w-full mb-7  ">
             <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">Fossil Digital Clock</h1>
@@ -107,7 +107,7 @@
    
 
     <!-- Analog Clock -->
-    <div class="hidden pageSwitches mt-20 mb-20 border h-96" id="AnalogClock">
+    <div class="hidden pageSwitches mt-20 mb-20  h-96" id="AnalogClock">
       <div class="flex h-full">
 
         <div
@@ -138,29 +138,24 @@
     </div>
 
     <!-- To-Do-List -->
-    <div class=" hidden toDoList-main-container w-full  rounded-md pageSwitches overflow-hidden" id="ToDoList">
-      <div class=" main-Container-Header h-14 bg-blue-600 text-white flex justify-between items-center">
+    <div class="  toDoList-main-container w-full  rounded-md pageSwitches overflow-hidden h-screen" id="ToDoList">
+      <div class=" main-Container-Header h-14 bg-blue-600 text-white flex  items-center">
         <div class="leftHeader logo flex justify-center items-center h-fit  w-1/4">
           <img src="./images/Icon/microsoft.png" class="w-20" alt="">
           <h1>To Do</h1>
         </div>
-        <div class=" todoList-search bottom-Header text-black w-2/4 h-full flex items-center justify-center">
-          <input type="search" id="searchTodo" class="w-96">
+        <div class=" todoList-search bottom-Header text-black w-2/4 h-full flex items-center  justify-center">
+          <input type="search" id="searchTodo" class="w-96 rounded-md">
         </div>
-        <div class="rightHeader tools w-1/4 ">
-          <i class="fa-solid fa-gear"></i>
-          <i class="fa-solid fa-user"></i>
-        </div>
+     
       </div>
 
 
 
       <div class="toDoList-rightConainer-AddToDo  bg-white w-full h-full  text-black  ">
-        <div class=" contentHeader border-b-2 h-20 flex items-center p-6">
-          <h1><b>My Day</b></h1>
-          <p class="mx-6" id="todoWeek">Week</p>
-          <p class="mx-6" id="todoDate">date</p>
-          <p id="todoMonth">Month</p>
+        <div class=" contentHeader border-b-2 h-20 flex  items-center p-6">
+          <h1 class="mr-6"><b>My Day</b></h1>
+          <i class="fa-solid fa-sun"></i>
         </div>
         <div class="p-3 flex items-center shadow-lg taskField">
 

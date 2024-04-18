@@ -23,10 +23,10 @@ let alert = document.getElementById('alert')
 let digitalClock = () => {
     setInterval(() => {
         let dateTime = new Date()
-        let obj={
-            hour:dateTime.getHours(),
-            minute:dateTime.getMinutes(),
-            second:dateTime.getSeconds()
+        let obj = {
+            hour: dateTime.getHours(),
+            minute: dateTime.getMinutes(),
+            second: dateTime.getSeconds()
         }
         analogClock(obj.second, obj.minute, obj.hour)
         toggle(obj.hour, obj.minute, obj.second)
@@ -90,7 +90,7 @@ let pages = document.getElementsByClassName('pages')
 Array.from(pageSwitches).forEach((element) => {
     element.addEventListener('click', () => {
         // Call pageSwitchFunc passing the clicked element
-        
+
         pageSwitchFunc(element)
     })
 })
@@ -161,13 +161,13 @@ let todoWeek = document.getElementById('todoWeek')
 let todoDate = document.getElementById('todoDate')
 let todoMonth = document.getElementById('todoMonth')
 let todoArr = [] //Storing saved toDo list length in array.
-let localStoragekeys= []
+let localStoragekeys = []
 
 
 // Created class for append todo content in html...and if website will referesh then the data will not lost for user.
 class ToDoClass {
     userData() { //The todo content using html.
-        savedTask.innerHTML += `<h1  class="savedItem border my-2 bg-slate-200 w-full p-5 rounded-md flex justify-between"> <div> <i class="fa-regular fa-circle mx-2" ></i>${this.data}</div><div class=" w-12 flex justify-between items-center"><i value="1" class="deleteTodo cursor-pointer fa-solid fa-trash"></i><i class="fa-regular fa-star"></i></div></h1>`;
+        savedTask.innerHTML += `<h1  class="savedItem border my-2 bg-slate-200 w-full p-5 rounded-md flex justify-between"> <div class="flex items-center"> <i class="fa-regular fa-circle mx-2" ></i><p>${this.data}</p></div><div class=" w-24 flex justify-between items-center"><i id="editTodo" class="editTodo cursor-pointer fa-solid fa-pen hover:text-blue-700"></i><i value="1" class="deleteTodo cursor-pointer fa-solid fa-trash hover:text-red-600"></i><i class="fa-regular fa-star"></i></div></h1>`;
     }
     givenData(data) { //Taking data form Todo function
         this.data = data;
@@ -179,7 +179,7 @@ class ToDoClass {
 let getDataFromLocalStorage = new ToDoClass()
 // Putting Class value in this variable.
 let toDo = () => {
-  addTaskButton.addEventListener('click', () => {
+    addTaskButton.addEventListener('click', () => {
         // todoArr.push(todoArr.length)           //Saving ids for each todo work in this array.
         if (inputTask.value === '') {    //Condition if input field is empty then user does not save the todo work.
             console.error("Please fill the input field")  //Console the error.
@@ -190,31 +190,34 @@ let toDo = () => {
             }, 3000);
         } else {
             todoArr.push(inputTask.value)
-             localStorage.setItem(todoArr.length, todoArr[todoArr.length-1]) //Saving user todo data in local storage.
-    inputTask.value = ""//After saving the input field will empty for new todo.
-    //Getting user data from local storage and sending the data in class.
-    getDataFromLocalStorage.givenData(localStorage.getItem(todoArr.length))
-    getDataFromLocalStorage.userData() //Called function from the class
-
-
+            localStorage.setItem(todoArr.length, todoArr[todoArr.length - 1]) //Saving user todo data in local storage.
+            inputTask.value = ""//After saving the input field will empty for new todo.
+            //Getting user data from local storage and sending the data in class.
+            getDataFromLocalStorage.givenData(localStorage.getItem(todoArr.length))
+            getDataFromLocalStorage.userData() //Called function from the class
+            removeTodo()
+            editTodo()
         }
-        removeTodo()
+       
 
     })
 
 
-for (let i = 0; i < localStorage.length; i++) {  //Looping for showing data after refresh the site.
-    localStoragekeys.push(Number.parseInt(localStorage.key(i)))
- localStoragekeys.sort()
-}
+    for (let i = 0; i < localStorage.length; i++) {  //Looping for showing data after refresh the site.
+        localStoragekeys.push(Number.parseInt(localStorage.key(i)))
+        localStoragekeys.sort()
+        
+    }
 
-    
-for(let i=0;i<localStorage.length;i++){
-    todoArr.push(localStorage.getItem(localStoragekeys[i].toString())) //Pushing i value in todoArr array.
-  
-    getDataFromLocalStorage.givenData(todoArr[i]) //Getting data from local storage and sending in class.
-    getDataFromLocalStorage.userData()//Calling class function.
-}
+
+    for (let i = 0; i < localStorage.length; i++) {
+        todoArr.push(localStorage.getItem(localStoragekeys[i].toString())) //Pushing i value in todoArr array.
+
+        getDataFromLocalStorage.givenData(todoArr[i]) //Getting data from local storage and sending in class.
+        getDataFromLocalStorage.userData()//Calling class function.
+
+    }
+
 
 
 }
@@ -229,7 +232,8 @@ let confirmationYes = document.getElementById('confirmationYes')
 let confirmationNo = document.getElementById('confirmationNo')
 
 
-let removeTodo = () => {  //Created the delete function for todo.
+let removeTodo = () => {
+    console.log("Remove todo function is running")  //Created the delete function for todo.
     for (let i = 0; i < deleteTodo.length; i++) { //Printing all todo items from dom.
         deleteTodo[i].addEventListener('click', (e) => {  //click event in delete icon.
             e.target.parentNode.parentNode.remove() //Deleting specific todo item which will select by the user.
@@ -237,28 +241,73 @@ let removeTodo = () => {  //Created the delete function for todo.
         })
     }
 }
-toDo()
-removeTodo()
+
+
 
 
 let searchTodo = document.getElementById('searchTodo')
 let searchValue = searchTodo.value
 searchTodo.addEventListener('input', () => {
     Array.from(savedItem).forEach((element) => {
-       
+
         if (element.firstElementChild.innerText.includes(searchTodo.value)) {
             element.style.display = "flex"
-    
+
         } else {
             element.style.display = "none"
-        
+
         }
     })
 })
 
 
+let editTodoButton = document.getElementsByClassName('editTodo')
+let editTodo = () => {
+    console.log(localStorage.length)
+    for (let i = 0; i < localStorage.length; i++) {
+        let editInput = document.createElement('input')
+        let element;
+        let editableContent;
+        editTodoButton[i].addEventListener('click', () => {
+            if (editTodoButton[i].classList.contains('fa-pen')) {
+                editTodoButton[i].index = localStoragekeys[i]
+                console.log(localStoragekeys)
+              element = editTodoButton[i]
+                element.classList.remove('fa-solid', 'fa-pen')
+                element.classList.add('fa-solid', 'fa-check','text-green-700')  
+                editInput.type = "text"
+                editInput.classList.add('bg-green-200','p-2')
+                editInput.style.width = "80vw"
+              editableContent  = element.parentNode.parentNode.firstElementChild.lastElementChild
+                editInput.value = editableContent.innerText
+                editableContent.innerHTML = "";
+                editableContent.append(editInput)
+            }
+            else {
+                localStorage.setItem(`${editTodoButton[i].index}`,editInput.value)
+                editableContent.innerText = editInput.value;
+                element.classList.remove('fa-solid', 'fa-check','text-green-700')
+                element.classList.add('fa-solid', 'fa-pen')
+
+            }
+         
+
+        })
 
 
+// toDo()
+
+    }
+
+
+
+
+
+}
+toDo()
+removeTodo()
+
+editTodo()
 
 
 
