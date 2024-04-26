@@ -4,7 +4,7 @@ console.log("Project 1")
 let displayHour = document.getElementById('hour')
 let displayMinute = document.getElementById('minute')
 let displaySecond = document.getElementById('second')
-let timeZone = document.getElementById('timeZone')
+let timezoneClock = document.getElementById('timeZone')
 let toggleTimeFormat = document.getElementById('toggleTimeFormat')
 let day = document.getElementById('week')
 let date = document.getElementById('date')
@@ -23,11 +23,14 @@ let alert = document.getElementById('alert')
 let digitalClock = () => {
     setInterval(() => {
         let dateTime = new Date()
+        
         let obj = {
             hour: dateTime.getHours(),
             minute: dateTime.getMinutes(),
             second: dateTime.getSeconds()
         }
+
+        
         analogClock(obj.second, obj.minute, obj.hour)
         toggle(obj.hour, obj.minute, obj.second)
         // ringAlarm(hour, minute)
@@ -37,11 +40,12 @@ let digitalClock = () => {
         date.innerText = dateTime.getDate()
         month.innerText = monthArr[dateTime.getMonth()]
         year.innerText = dateTime.getFullYear()
-        if (hour == 12 && second > 0) {
-            timeZone.innerText = 'Pm'
+        if (obj.hour >= 12 && obj.second > 0) {
+            timezoneClock.innerText = 'Pm'
         } else {
-            timeZone.innerText = 'Am'
+            timezoneClock.innerText = 'Am'
         }
+      
 
 
     }, 1000);
@@ -88,9 +92,12 @@ let pages = document.getElementsByClassName('pages')
 
 // Iterate over each element in the pageSwitches NodeList and attach a click event listener to it
 Array.from(pageSwitches).forEach((element) => {
+    element.classList.remove('text-white')
     element.addEventListener('click', () => {
         // Call pageSwitchFunc passing the clicked element
-
+      
+       
+        element.classList.add('text-white')
         pageSwitchFunc(element)
     })
 })
@@ -104,6 +111,7 @@ let pageSwitchFunc = (e) => {
     // Initialize variables for index and element array
     let index;
     let elementArr = []
+   
 
     // Iterate over each element in the pageSwitches2 NodeList
     Array.from(pageSwitches2).forEach((element) => {
@@ -123,6 +131,7 @@ let pageSwitchFunc = (e) => {
         } else {
             // If the ID matches, display the element
             elementArr[index].style.display = "block" // Note: "block" corrected from "Block" to match CSS
+            console.log(elementArr[index])
         }
     })
 }
@@ -151,6 +160,96 @@ let analogClock = (second, minute, hour) => {
     minuteHand.style.rotate = `${minuteDeg}deg`
     hourHand.style.rotate = `${hourDeg}deg`
 }
+
+
+// Weather
+
+let areaLocation = document.getElementById('location')
+let tempreature = document.getElementById('tempreature')
+let locationName = document.getElementById('locationName')
+let searchLocationBtn = document.getElementById('searchLocationBtn')
+let searchError = document.getElementById('searchError')
+let apiErrorMessage = document.getElementById('apiErrorMessage')
+let askLocationPage = document.getElementById('askLocation')
+let weatherResultPage = document.getElementById('showWeatherResult')
+
+searchLocationBtn.addEventListener('click',()=>{
+
+    editApi(locationName.value)
+
+})
+
+
+
+
+let editApi = (value)=>{
+    const url = `https://weather-api138.p.rapidapi.com/weather?city_name=${value}`;
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '01ca6a8199msh68335ea786a5b1ep13000bjsn946b43a1c2d4',
+            'X-RapidAPI-Host': 'weather-api138.p.rapidapi.com'
+        }
+    };
+    weatherApi(url,options)
+}
+
+
+let  weatherApi= async (url,options)=>{
+    try {
+        const response = await fetch(url ,options);
+        const result = await response.json();
+      
+        if(locationName.value == ''){
+            console.log(locationName.value)
+            searchError.classList.remove('hidden')
+            searchError.innerText=`Enter City Name.`
+          }else if(result.cod == 404){
+       searchError.classList.remove('hidden')
+       searchError.innerText=`${result.message}`
+      }
+      else{
+          apiData(result)        
+      }
+      askLocationPage.classList.add('hidden')
+      weatherResultPage.classList.remove('hidden')
+    } catch (error) {
+   console.log(error)
+        
+    }
+    
+}
+
+
+
+let apiData = (data,error)=>{
+
+        ({coord,weather,main,wind,clouds,timezone,sys,name,}=data)
+        temp = main.temp_max - 273.15 
+    areaLocation.innerText=`${name},${sys.country}`
+    tempreature.innerHTML=`<h1>${temp.toFixed(0)}&deg;  C</h1>`;
+    console.log(coord,weather,main,wind,clouds,timezone,sys,name)
+     
+    
+    
+
+   
+   
+
+
+}
+
+
+
+
+
+weatherApi()
+
+
+
+
+
+
 
 
 // To-Do-List
@@ -233,7 +332,7 @@ let confirmationNo = document.getElementById('confirmationNo')
 
 
 let removeTodo = () => {
-    console.log("Remove todo function is running")  //Created the delete function for todo.
+ //Created the delete function for todo.
     for (let i = 0; i < deleteTodo.length; i++) { //Printing all todo items from dom.
         deleteTodo[i].addEventListener('click', (e) => {  //click event in delete icon.
             e.target.parentNode.parentNode.remove() //Deleting specific todo item which will select by the user.
@@ -263,7 +362,7 @@ searchTodo.addEventListener('input', () => {
 
 let editTodoButton = document.getElementsByClassName('editTodo')
 let editTodo = () => {
-    console.log(localStorage.length)
+    
     for (let i = 0; i < localStorage.length; i++) {
         let editInput = document.createElement('input')
         let element;
