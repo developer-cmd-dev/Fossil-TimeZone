@@ -23,14 +23,14 @@ let alert = document.getElementById('alert')
 let digitalClock = () => {
     setInterval(() => {
         let dateTime = new Date()
-        
+
         let obj = {
             hour: dateTime.getHours(),
             minute: dateTime.getMinutes(),
             second: dateTime.getSeconds()
         }
 
-        
+
         analogClock(obj.second, obj.minute, obj.hour)
         toggle(obj.hour, obj.minute, obj.second)
         // ringAlarm(hour, minute)
@@ -45,7 +45,7 @@ let digitalClock = () => {
         } else {
             timezoneClock.innerText = 'Am'
         }
-      
+
 
 
     }, 1000);
@@ -81,7 +81,7 @@ let timeFormate = () => {
 
 
 let digitalClockPage = document.getElementById('DigitalClock')
-let weatherPage = document.getElementById('Weather')
+
 let analogPage = document.getElementById('AnalogClock')
 let pageSwitches = document.getElementsByClassName('navButtons')
 let pageSwitches2 = document.getElementsByClassName('pageSwitches')
@@ -92,34 +92,36 @@ let pages = document.getElementsByClassName('pages')
 
 // Iterate over each element in the pageSwitches NodeList and attach a click event listener to it
 Array.from(pageSwitches).forEach((element) => {
-    element.classList.remove('text-white')
-    element.addEventListener('click', () => {
+    element.addEventListener('click', (e) => {
         // Call pageSwitchFunc passing the clicked element
-      
-       
-        element.classList.add('text-white')
         pageSwitchFunc(element)
+
+       
+     
     })
 })
 
 
 // Function to switch pages or elements based on the clicked element
 let pageSwitchFunc = (e) => {
+    
     // Log the ID of the clicked element
     // Initialize an empty array to store IDs of pageSwitches2 elements
     let arr = [];
     // Initialize variables for index and element array
     let index;
     let elementArr = []
-   
+
 
     // Iterate over each element in the pageSwitches2 NodeList
     Array.from(pageSwitches2).forEach((element) => {
         // Push the ID of each element into the arr array
+        
         arr.push(element.id)
 
         // Find the index of the clicked element's ID in the arr array
         index = arr.indexOf(e.id)
+        
 
         // Push each element into the elementArr array
         elementArr.push(element)
@@ -127,11 +129,11 @@ let pageSwitchFunc = (e) => {
         // If the ID of the current element does not match the clicked element's ID
         if (element.id != e.id) {
             // Hide the element
-            element.style.display = "none"
+            element.classList.add('hidden')
         } else {
             // If the ID matches, display the element
-            elementArr[index].style.display = "block" // Note: "block" corrected from "Block" to match CSS
-            console.log(elementArr[index])
+            elementArr[index].classList.remove('hidden') // Note: "block" corrected from "Block" to match CSS
+            
         }
     })
 }
@@ -165,25 +167,24 @@ let analogClock = (second, minute, hour) => {
 // Weather
 
 let areaLocation = document.getElementById('location')
-let tempreature = document.getElementById('tempreature')
+let tempreature = document.getElementsByClassName('tempreature')
 let locationName = document.getElementById('locationName')
 let searchLocationBtn = document.getElementById('searchLocationBtn')
 let searchError = document.getElementById('searchError')
 let apiErrorMessage = document.getElementById('apiErrorMessage')
-let askLocationPage = document.getElementById('askLocation')
-let weatherResultPage = document.getElementById('showWeatherResult')
 
-searchLocationBtn.addEventListener('click',()=>{
+let previousPageBtn = document.getElementById('previousPage')
+let weatherTypeIcon = document.getElementById('weatherTypeIcon')
+
+searchLocationBtn.addEventListener('click', () => {
 
     editApi(locationName.value)
 
 })
 
-
-
-
-let editApi = (value)=>{
+let editApi = (value) => {
     const url = `https://weather-api138.p.rapidapi.com/weather?city_name=${value}`;
+
     const options = {
         method: 'GET',
         headers: {
@@ -191,59 +192,91 @@ let editApi = (value)=>{
             'X-RapidAPI-Host': 'weather-api138.p.rapidapi.com'
         }
     };
-    weatherApi(url,options)
+    weatherApi(url, options)
 }
 
 
-let  weatherApi= async (url,options)=>{
+let askLocationPage = document.getElementById('askLocation')
+let weatherMainPage = document.getElementById('weatherMainPage')
+console.log(weatherMainPage)
+
+let weatherApi = async (url, options) => {
     try {
-        const response = await fetch(url ,options);
+        const response = await fetch(url, options);
         const result = await response.json();
-      
-        if(locationName.value == ''){
+
+        if (locationName.value == '') {
             console.log(locationName.value)
             searchError.classList.remove('hidden')
-            searchError.innerText=`Enter City Name.`
-          }else if(result.cod == 404){
-       searchError.classList.remove('hidden')
-       searchError.innerText=`${result.message}`
-      }
-      else{
-          apiData(result)        
-      }
-      askLocationPage.classList.add('hidden')
-      weatherResultPage.classList.remove('hidden')
+            searchError.innerText = `Enter City Name.`
+        } else if (result.cod == 404) {
+            searchError.classList.remove('hidden')
+            searchError.innerText = `${result.message}`
+        }
+        else {
+            apiData(result)
+            askLocationPage.classList.add('hidden')
+            weatherMainPage.classList.remove('hidden')
+          
+            
+        }
+
+
+
     } catch (error) {
-   console.log(error)
-        
+        console.log(error)
+
     }
-    
-}
-
-
-
-let apiData = (data,error)=>{
-
-        ({coord,weather,main,wind,clouds,timezone,sys,name,}=data)
-        temp = main.temp_max - 273.15 
-    areaLocation.innerText=`${name},${sys.country}`
-    tempreature.innerHTML=`<h1>${temp.toFixed(0)}&deg;  C</h1>`;
-    console.log(coord,weather,main,wind,clouds,timezone,sys,name)
-     
-    
-    
-
-   
-   
-
 
 }
+let Precipitation = document.getElementById('Precipitation')
+let Humidity = document.getElementById('Humidity')
+let Wind = document.getElementById('Wind')
+let apiDay = document.getElementsByClassName('apiDay')
+let apiDateTime = document.getElementById('apiDate')
+let pressure = document.getElementById('pressure')
+
+
+let apiData = (data, error) => {
+    ({ coord, weather, main, wind, clouds, timezone, sys, name, } = data)
+
+
+    // Get current UTC time
+    let d = new Date()
+    let localTime = d.getTime()
+    let localOffset = d.getTimezoneOffset() * 60000
+   let  utc = localTime + localOffset
+    var atlanta = utc + (timezone * -14400)
+    let nd = new Date(atlanta)
+    console.log(nd)
 
 
 
 
 
-weatherApi()
+    let apiDate = new Date((sys.sunrise + timezone) * 1000)
+
+    Array.from(apiDay).forEach((element) => {
+        element.innerText = `${weekArr[apiDate.getDay() - 1]}`
+    })
+
+
+    apiDateTime.innerText = `${apiDate.getDate()}, ${monthArr[apiDate.getMonth()]}, ${apiDate.getFullYear()}`
+    temp = main.temp_max - 273.15
+    areaLocation.innerText = `${name},${sys.country}`
+
+    Array.from(tempreature).forEach((element) => {
+        element.innerHTML = `<h1>${temp.toFixed(0)}&deg;  C</h1>`;
+    })
+
+    const iconUrl = ` https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
+    weatherTypeIcon.innerHTML = ` <img src="${iconUrl}" alt="404">`
+    pressure.innerText = `${main.pressure} hPa`
+    Humidity.innerText = `${main.humidity}%`;
+    let windSpeed = (wind.speed)*3.6;
+    Wind.innerText= `${windSpeed.toFixed(0)} km/h`;
+}
+
 
 
 
@@ -297,7 +330,7 @@ let toDo = () => {
             removeTodo()
             editTodo()
         }
-       
+
 
     })
 
@@ -305,7 +338,7 @@ let toDo = () => {
     for (let i = 0; i < localStorage.length; i++) {  //Looping for showing data after refresh the site.
         localStoragekeys.push(Number.parseInt(localStorage.key(i)))
         localStoragekeys.sort()
-        
+
     }
 
 
@@ -332,7 +365,7 @@ let confirmationNo = document.getElementById('confirmationNo')
 
 
 let removeTodo = () => {
- //Created the delete function for todo.
+    //Created the delete function for todo.
     for (let i = 0; i < deleteTodo.length; i++) { //Printing all todo items from dom.
         deleteTodo[i].addEventListener('click', (e) => {  //click event in delete icon.
             e.target.parentNode.parentNode.remove() //Deleting specific todo item which will select by the user.
@@ -362,7 +395,7 @@ searchTodo.addEventListener('input', () => {
 
 let editTodoButton = document.getElementsByClassName('editTodo')
 let editTodo = () => {
-    
+
     for (let i = 0; i < localStorage.length; i++) {
         let editInput = document.createElement('input')
         let element;
@@ -371,30 +404,30 @@ let editTodo = () => {
             if (editTodoButton[i].classList.contains('fa-pen')) {
                 editTodoButton[i].index = localStoragekeys[i]
                 console.log(localStoragekeys)
-              element = editTodoButton[i]
+                element = editTodoButton[i]
                 element.classList.remove('fa-solid', 'fa-pen')
-                element.classList.add('fa-solid', 'fa-check','text-green-700')  
+                element.classList.add('fa-solid', 'fa-check', 'text-green-700')
                 editInput.type = "text"
-                editInput.classList.add('bg-green-200','p-2')
+                editInput.classList.add('bg-green-200', 'p-2')
                 editInput.style.width = "80vw"
-              editableContent  = element.parentNode.parentNode.firstElementChild.lastElementChild
+                editableContent = element.parentNode.parentNode.firstElementChild.lastElementChild
                 editInput.value = editableContent.innerText
                 editableContent.innerHTML = "";
                 editableContent.append(editInput)
             }
             else {
-                localStorage.setItem(`${editTodoButton[i].index}`,editInput.value)
+                localStorage.setItem(`${editTodoButton[i].index}`, editInput.value)
                 editableContent.innerText = editInput.value;
-                element.classList.remove('fa-solid', 'fa-check','text-green-700')
+                element.classList.remove('fa-solid', 'fa-check', 'text-green-700')
                 element.classList.add('fa-solid', 'fa-pen')
 
             }
-         
+
 
         })
 
 
-// toDo()
+        // toDo()
 
     }
 
