@@ -1,14 +1,1 @@
-Algorithm for project.
-1.Design a good looking ui for our app.
-2.Create a digital clock and program it.
-Add alarm feature in bote clock.
-3.Create a Analog Clock and program it.
-4.Create a toggle button for swith analog and digital watch.
-5.Fetch a weather api.
-6.Create good looking ui for show weather system in our app.
-7.Create a weather app and program it.
-8.After Doing it all you must add the todo list feature in our app.
-9.And make it best ui app.
 
-
-convert temp in celcius doing substract 273.15 in given api data
