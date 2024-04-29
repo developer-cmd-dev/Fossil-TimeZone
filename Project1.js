@@ -10,7 +10,7 @@ let day = document.getElementById('week')
 let date = document.getElementById('date')
 let month = document.getElementById('month')
 let year = document.getElementById('year')
-let weekArr = ['Monday', 'Tuesday', 'Wednesday', 'Thrusday', 'Friday', 'Saturday', 'Sunday']
+let weekArr = ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thrusday', 'Friday', 'Saturday' ]
 let monthArr = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 let timePeriod = document.getElementById('am/pm')
 let alert = document.getElementById('alert')
@@ -36,7 +36,7 @@ let digitalClock = () => {
         // ringAlarm(hour, minute)
         displayMinute.innerText = obj.minute;
         displaySecond.innerText = obj.second;
-        day.innerText = weekArr[dateTime.getDay() - 1]
+        day.innerText =weekArr[dateTime.getDay()];
         date.innerText = dateTime.getDate()
         month.innerText = monthArr[dateTime.getMonth()]
         year.innerText = dateTime.getFullYear()
@@ -92,11 +92,14 @@ let pages = document.getElementsByClassName('pages')
 
 // Iterate over each element in the pageSwitches NodeList and attach a click event listener to it
 Array.from(pageSwitches).forEach((element) => {
+
     element.addEventListener('click', (e) => {
         // Call pageSwitchFunc passing the clicked element
         pageSwitchFunc(element)
-
+        console.log(element)
        
+
+      
      
     })
 })
@@ -104,7 +107,7 @@ Array.from(pageSwitches).forEach((element) => {
 
 // Function to switch pages or elements based on the clicked element
 let pageSwitchFunc = (e) => {
-    
+   
     // Log the ID of the clicked element
     // Initialize an empty array to store IDs of pageSwitches2 elements
     let arr = [];
@@ -130,9 +133,12 @@ let pageSwitchFunc = (e) => {
         if (element.id != e.id) {
             // Hide the element
             element.classList.add('hidden')
+            e.classList.remove('text-white')
+          console.log(element)
         } else {
             // If the ID matches, display the element
             elementArr[index].classList.remove('hidden') // Note: "block" corrected from "Block" to match CSS
+            console.log(e)
             
         }
     })
@@ -174,7 +180,7 @@ let searchError = document.getElementById('searchError')
 let apiErrorMessage = document.getElementById('apiErrorMessage')
 
 let previousPageBtn = document.getElementById('previousPage')
-let weatherTypeIcon = document.getElementById('weatherTypeIcon')
+
 
 searchLocationBtn.addEventListener('click', () => {
 
@@ -198,7 +204,7 @@ let editApi = (value) => {
 
 let askLocationPage = document.getElementById('askLocation')
 let weatherMainPage = document.getElementById('weatherMainPage')
-console.log(weatherMainPage)
+
 
 let weatherApi = async (url, options) => {
     try {
@@ -217,6 +223,12 @@ let weatherApi = async (url, options) => {
             apiData(result)
             askLocationPage.classList.add('hidden')
             weatherMainPage.classList.remove('hidden')
+            previousPageBtn.classList.remove('hidden')
+            previousPageBtn.addEventListener('click',()=>{
+                weatherMainPage.classList.add('hidden')
+                askLocationPage.classList.remove('hidden')
+                previousPageBtn.classList.add('hidden')
+            })
           
             
         }
@@ -235,34 +247,21 @@ let Wind = document.getElementById('Wind')
 let apiDay = document.getElementsByClassName('apiDay')
 let apiDateTime = document.getElementById('apiDate')
 let pressure = document.getElementById('pressure')
+let windDeg = document.getElementById('windDeg')
+let tempMax = document.getElementById('tempMax')
+let tempMin = document.getElementById('tempMin')
+let weatherType1 = document.getElementById('weatherType1')
+let weatherType2 = document.getElementById('weatherType2')
+let weatherTypeIcon = document.getElementById('weatherTypeIcon')
+
+
 
 
 let apiData = (data, error) => {
     ({ coord, weather, main, wind, clouds, timezone, sys, name, } = data)
 
-
-    // Get current UTC time
-    let d = new Date()
-    let localTime = d.getTime()
-    let localOffset = d.getTimezoneOffset() * 60000
-   let  utc = localTime + localOffset
-    var atlanta = utc + (timezone * -14400)
-    let nd = new Date(atlanta)
-    console.log(nd)
-
-
-
-
-
-    let apiDate = new Date((sys.sunrise + timezone) * 1000)
-
-    Array.from(apiDay).forEach((element) => {
-        element.innerText = `${weekArr[apiDate.getDay() - 1]}`
-    })
-
-
-    apiDateTime.innerText = `${apiDate.getDate()}, ${monthArr[apiDate.getMonth()]}, ${apiDate.getFullYear()}`
-    temp = main.temp_max - 273.15
+    let temp = main.temp_max - 273.15
+    let tempMinData = main.temp_min -273.15
     areaLocation.innerText = `${name},${sys.country}`
 
     Array.from(tempreature).forEach((element) => {
@@ -270,11 +269,18 @@ let apiData = (data, error) => {
     })
 
     const iconUrl = ` https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
-    weatherTypeIcon.innerHTML = ` <img src="${iconUrl}" alt="404">`
+    weatherTypeIcon.innerHTML = ` <img src="${iconUrl}" class="block" alt="404">`
     pressure.innerText = `${main.pressure} hPa`
     Humidity.innerText = `${main.humidity}%`;
     let windSpeed = (wind.speed)*3.6;
     Wind.innerText= `${windSpeed.toFixed(0)} km/h`;
+    windDeg.innerHTML = `<h1>${wind.deg} &deg;</h1>`
+    tempMax.innerHTML =  `<h1>${temp.toFixed(0)}&deg;  C</h1>`;
+    tempMin.innerHTML =  `<h1>${tempMinData.toFixed(0)}&deg;  C</h1>`;
+    weatherType1.innerText=`${weather[0].main}`
+    weatherType2.innerText=`${weather[0].main}`
+
+
 }
 
 
@@ -299,7 +305,7 @@ let localStoragekeys = []
 // Created class for append todo content in html...and if website will referesh then the data will not lost for user.
 class ToDoClass {
     userData() { //The todo content using html.
-        savedTask.innerHTML += `<h1  class="savedItem border my-2 bg-slate-200 w-full p-5 rounded-md flex justify-between"> <div class="flex items-center"> <i class="fa-regular fa-circle mx-2" ></i><p>${this.data}</p></div><div class=" w-24 flex justify-between items-center"><i id="editTodo" class="editTodo cursor-pointer fa-solid fa-pen hover:text-blue-700"></i><i value="1" class="deleteTodo cursor-pointer fa-solid fa-trash hover:text-red-600"></i><i class="fa-regular fa-star"></i></div></h1>`;
+        savedTask.innerHTML += `  <h1  class="savedItem border my-2 bg-slate-200 w-full p-5 rounded-md flex sm:flex-row md:flex-row lg:flex-row flex-wrap  justify-between"> <div class="flex items-center "> <i class="fa-regular fa-circle mx-2 " ></i><p>${this.data}</p></div><div class=" sm:w-24 md:w-24 lg:w-24 w-full flex lg:justify-between md:justify-between sm:justify-between justify-end items-center sm:mt-0 md:mt-0 lg:mt-0 mt-10 border "><i id="editTodo" class="lg:mr-0 md:mr0 sm:mr-0 mr-4 editTodo cursor-pointer fa-solid fa-pen hover:text-blue-700"></i><i value="1" class="lg:mr-0 md:mr0 sm:mr-0 mr-4 deleteTodo cursor-pointer fa-solid fa-trash hover:text-red-600"></i><i class="fa-regular fa-star"></i></div></h1>`;
     }
     givenData(data) { //Taking data form Todo function
         this.data = data;
@@ -398,10 +404,14 @@ let editTodo = () => {
 
     for (let i = 0; i < localStorage.length; i++) {
         let editInput = document.createElement('input')
+       
         let element;
         let editableContent;
         editTodoButton[i].addEventListener('click', () => {
+           
             if (editTodoButton[i].classList.contains('fa-pen')) {
+               
+             
                 editTodoButton[i].index = localStoragekeys[i]
                 console.log(localStoragekeys)
                 element = editTodoButton[i]
@@ -409,7 +419,8 @@ let editTodo = () => {
                 element.classList.add('fa-solid', 'fa-check', 'text-green-700')
                 editInput.type = "text"
                 editInput.classList.add('bg-green-200', 'p-2')
-                editInput.style.width = "80vw"
+               editInput.classList.add('w-[60vw]')
+               editInput.classList.add('flex-wrap')
                 editableContent = element.parentNode.parentNode.firstElementChild.lastElementChild
                 editInput.value = editableContent.innerText
                 editableContent.innerHTML = "";

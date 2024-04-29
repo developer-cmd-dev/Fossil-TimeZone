@@ -14,8 +14,8 @@
 <body class="h-screen  bg-gray-900 ">
 
   <!-- Navbar  -->
-  <header class="text-gray-400 bg-gray-900 body-font  transition-colors ">
-    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+  <header class=" text-gray-400 bg-slate-700 lg:bg-slate-900 md:bg-slate-900 sm:bg-slate-900 body-font  transition-colors w-full">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col lg:flex-row md:flex-row   items-center">
       <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
         <img class="invert w-20" src="./Images/Icon/Logo.png" alt="">
 
@@ -47,14 +47,14 @@
 
 
   <!-- Main Page -->
-  <section class="text-gray-400  body-font flex ">
-    <div class="container px-5  mx-auto flex flex-col items-center justify-center  ">
+  <section class="text-gray-400  body-font flex flex-wrap  ">
+    <div class="container lg:px-5 md:px-5 sm:px-5 px-0  mx-auto flex  flex-col items-center justify-center w-20vw   ">
       <!-- Digital  clock  -->
-      <div class=" hidden  mt-20 mb-20 pageSwitches " id="DigitalClock">
-        <div class="flex flex-col items-center justify-center pages  h-full mb-7">
-          <div class="flex flex-col text-center w-full mb-7  ">
-            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">Fossil Digital Clock</h1>
-            <div id="toggle">
+      <div class=" hidden   lg:mt-20 lg:mb-20 md:mt-20 md:mb-20 sm:mt-20 sm:mb-20 mt-12  bg-slate-800 rounded-md  pageSwitches  w-[85vw]  " id="DigitalClock">
+        <div class="flex flex-col items-center justify-center pages h-full mb-7">
+          <div class="flex flex-col text-center  w-full mb-7  ">
+            <h1 class="  lg:text-4xl md:text-3xl sm:text-2xl text-[1rem] font-medium title-font mb-4 text-white">Fossil Digital Clock</h1>
+            <div id="toggle" class=" w-full">
               <label class="inline-flex items-center cursor-pointer">
                 <input type="checkbox" value="true" class="sr-only peer" id="toggleTimeFormat" onclick=timeFormate()>
                 <div
@@ -65,31 +65,31 @@
             </div>
           </div>
 
-          <div class=" flex flex-col items-center justify-center pages   h-56 ">
-            <div class="flex items-center justify-around text-lg font-bold w-4/5  ">
-              <div class=" bg-white m-2  w-44 h-16 rounded-md flex items-center justify-center">
+          <div class=" flex flex-col items-center justify-center pages  w-full   lg:h-56 md:h-56 sm:h-56 ">
+            <div class="flex items-center justify-around text-lg font-bold   ">
+              <div class=" bg-white m-1 lg:w-26 lg:h-12 md:w-24 md:h-10 sm:w-24 sm:h-10 w-full p-1 rounded-md flex items-center justify-center">
 
-                <h1 class="text-black" id="hour"></h1>
-                <p>h</p>
+                <h1 class="text-black text-sm lg:text-[1.5rem] md:text-[1.5rem] sm:text-[1.5rem] " id="hour"></h1>
+                <p class="text-sm lg:text-[1.5rem] md:text-[1.5rem] sm:text-[1.5rem]">h</p>
               </div>
               <span>:</span>
-              <div class=" bg-white m-2 w-44 h-16 rounded-md flex items-center justify-center">
-                <h1 class="text-black" id="minute"></h1>
-                <p>m</p>
+              <div class=" bg-white m-1 lg:w-26 lg:h-12 md:w-24 md:h-10 sm:w-24 sm:h-10 w-full p-1  rounded-md flex items-center justify-center">
+                <h1 class="text-black text-sm lg:text-[1.5rem] md:text-[1.5rem] sm:text-[1.5rem] " id="minute"></h1>
+                <p class="text-sm  lg:text-[1.5rem] md:text-[1.5rem] sm:text-[1.5rem]">m</p>
               </div>
               <span>:</span>
-              <div class="bg-white m-2  w-44 h-16 rounded-md flex items-center justify-center">
-                <h1 class="text-black" id="second"></h1>
-                <p>S</p>
+              <div class="bg-white m-1 lg:w-26 lg:h-12 md:w-24 md:h-10 sm:w-24 sm:h-10 w-full p-1 rounded-md flex items-center justify-center">
+                <h1 class="text-black text-sm lg:text-[1.5rem] md:text-[1.5rem] sm:text-[1.5rem]" id="second"></h1>
+                <p class="text-sm lg:text-[1.5rem] md:text-[1.5rem] sm:text-[1.5rem]">S</p>
               </div>
               <span>:</span>
-              <div class="bg-blue-600 rounded-md m-2">
-                <h1 id="timeZone" class="w-44 h-16  rounded-md flex items-center justify-center text-white "></h1>
+              <div class="bg-blue-600  m-1 lg:w-26 lg:h-12 md:w-24 md:h-10 sm:w-24 sm:h-10 w-full p-1  rounded-md flex items-center justify-center">
+                <h1 id="timeZone" class="text-sm lg:text-[1.5rem] md:text-[1.5rem] sm:text-[1.5rem]  text-white "></h1>
               </div>
 
             </div>
-            <div id="dateContainer"
-              class="flex w-96   mt-6 font-bold text-white justify-around items-center font-dancing">
+            <div id="dateContainer " 
+              class="flex lg:w-70 md:w-68 sm:w-62     mt-6 font-bold text-white justify-around items-center font-dancing">
               <h1 id="week"></h1>
               <span>-</span>
               <h1 id="date"></h1>
@@ -107,26 +107,26 @@
 
 
       <!-- Analog Clock -->
-      <div class="hidden pageSwitches mt-20 mb-20  h-96" id="AnalogClock">
-        <div class="flex h-full">
+      <div class="hidden pageSwitches lg:mt-20 lg:mb-20 md:mt-20 md:mb-20 sm:mt-10    flex " id="AnalogClock">
+        <div class=" lg:flex lg:flex-row md:flex md:flex-row sm:flex sm:flex-col flex flex-col  justify-center  items-center   ">
 
           <div
-            class="relative    bg-[url('./Images/Images/AnalogClock3.png')] h-full w-3/6 bg-center bg-no-repeat bg-contain flex justify-center items-center ">
+            class="relative    bg-[url('./Images/Images/AnalogClock3.png')] h-[60vh] lg:w-3/6 md:w-3/6 sm:w-3/6 w-64 bg-center bg-no-repeat bg-contain flex justify-center items-center ">
             <div
-              class="hand hour-hand origin-bottom rotate-0 w-2 h-24  bg-black border-t-8 absolute left-3/6 bottom-2/4"
+              class="hand hour-hand origin-bottom rotate-0 w-2 lg:h-20 md:h-20 sm:h-16 h-12 bg-black border-t-8 absolute left-3/6 bottom-2/4"
               id="hourHand"></div>
             <div
-              class="hand minute-hand origin-bottom rotate-0   w-1.5 h-32  bg-black border-t-8 absolute left-3/6 bottom-2/4"
+              class="hand minute-hand origin-bottom rotate-0   w-1.5 lg:h-28 md:h-28 sm:h-24 h-20  bg-black border-t-8 absolute left-3/6 bottom-2/4"
               id="minuteHand"></div>
-            <div class="hand second-hand origin-bottom  w-1 h-36  bg-black border-t-8 absolute left-3/6 bottom-2/4"
+            <div class="hand second-hand origin-bottom  w-1 lg:h-32 md:h-32 sm:h-28 h-24  bg-black border-t-8 absolute left-3/6 bottom-2/4"
               id="secondHand"></div>
             <div class="h-6 w-6 absolute bg-black rounded-full "></div>
 
           </div>
 
-          <div class=" w-3/6 flex justify-center items-center flex-col p-5 bg-slate-700 rounded-md">
-            <img src="./Images/Icon/Logo.png" class="invert w-52 " alt="">
-            <p>The clock is one of the oldest human inventions, meeting the need to measure intervals of time shorter
+          <div class=" lg:w-3/6 md:w-3/6 sm:w-full w-full flex flex-col justify-center items-center  p-5 bg-slate-700 rounded-md">
+            <img src="./Images/Icon/Logo.png" class="invert lg:w-52 md:w-32 sm:w-[30vw] sm:mr-8 w-[30vw] mr-8 " alt="">
+            <p class="text-sm">The clock is one of the oldest human inventions, meeting the need to measure intervals of time shorter
               than the natural units such as the day, the lunar month, and the year. Devices operating on several
               physical processes have been used over the millennia.</p>
           </div>
@@ -134,10 +134,12 @@
       </div>
 
       <!-- Weather -->
-      <div class="  pageSwitches " id="Weather">
+      <div class=" pageSwitches " id="Weather">
         <div>
+
+          <!-- Previous page button -->
           <div
-            class="hidden absolute h-[6vh] w-[3vw] rounded-full flex items-center justify-center left-5 bg-white text-black hover:bg-slate-500 hover:text-white cursor-pointer"
+            class=" hidden absolute h-8 w-8 rounded-full flex items-center justify-center top-7 left-5 bg-white text-black hover:bg-slate-500 hover:text-white cursor-pointer"
             id="previousPage">
             <i class="fa-solid fa-arrow-left"></i>
           </div>
@@ -145,9 +147,9 @@
 
 
           <!-- Ask location from user (page) -->
-          <div class=" text-gray-400 bg-gray-900 body-font mt-28 " id="askLocation">
+          <div class=" hidden text-gray-400 bg-gray-900 body-font mt-28 " id="askLocation">
             <div
-              class="lg:w-full md:w-1/2 bg-gray-800 bg-opacity-50 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
+              class="lg:w-full md:w-full bg-gray-800 bg-opacity-50 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
               <h2 class="text-white text-lg font-medium title-font mb-5">See Your Location Weather <i
                   class="fa-solid fa-location-dot"></i></h2>
               <div class="relative mb-4">
@@ -160,8 +162,8 @@
               </div>
 
               <button id="searchLocationBtn"
-                class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Search
-                <i class="fa-solid fa-magnifying-glass"></i></button>
+                class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded lg:text-lg md:text-lg sm:text-md text-sm">Search
+                <i class="fa-solid fa-magnifying-glass ml-2"></i></button>
               <p class="text-xs mt-3">Literally you probably haven't heard of them jean shorts.</p>
             </div>
           </div>
@@ -171,9 +173,9 @@
 
 
 
-          <div id="weatherMainPage" class="hidden flex justify-center items-center flex-col  w-[70vw]">
+          <div id="weatherMainPage" class=" hidden flex justify-center items-center flex-col  w-[70vw]">
             <div class="flex items-center justify-center p-12">
-              <h1 class="text-white text-[3rem]">Fossil Forcasting.</h1>
+              <h1 class="text-white lg:text-[3rem] md:text-[2rem] sm:text-[1.5rem] text-xl">Fossil Forcasting.</h1>
 
             </div>
             <div class="flex flex-wrap w-full  ">
@@ -181,118 +183,128 @@
                 style="background-image: url('https://images.unsplash.com/photo-1559963110-71b394e7494d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80')">
                 <div class="rounded-lg py-6 pl-8 pr-32 w-full bg-blue-400 opacity-90 text-white">
                   <div class="mb-20">
-                    <h2 class="font-bold text-3xl leading-none pb-1 apiDay">Tuesday</h2>
-                    <h3 class="leading-none pb-2 pl-1" id="apiDate">15 Jan 19</h3>
+                    <h2 class="font-bold lg:text-3xl md:text-3xl sm:text-3xl text-2xl leading-none pb-1 apiDay">Tuesday</h2>
+                    <h3 class="leading-none pb-2 pl-1  w-24" id="apiDate">15 Jan 19</h3>
                     <p id="location" class="flex aling-center opacity-75 "><i class="fa-solid fa-location-pin"></i>
 
                     </p>
                   </div>
-                  <div id="weatherTypeIcon"></div>
-                  <div>
-                    <h1 class="tempreature leading-none text-6xl block font-weight-bolder"></h1>
-                    <b id="weatherType" class="text-2xl block font-bold"></b>
+                  <div id="weatherTypeIcon" class="" ></div>
+                  <div class=" lg:w-40 md:w-40 sm:w-40 w-32">
+                    <h1 class="tempreature leading-none  lg:text-4xl md:text-4xl sm:text-4xl text-2xl block font-weight-bolder"></h1>
+                    <b id="weatherType1" class=" lg:text-4xl md:text-4xl sm:text-4xl text-2xl  block font-bold"></b>
                   </div>
                 </div>
               </div>
 
               <div class="w-full lg:w-1/2 flex ml-0">
-                <div class="lg:my-3 bg-gray-800 text-white p-8 lg:rounded-r-lg w-full">
+                <div class="lg:my-4 bg-gray-800 text-white p-8 lg:rounded-r-lg w-full">
                   <div class="flex justify-between w-64 mb-4 w-full">
-                    <div class="w-auto font-bold uppercase text-90">Pressure</div>
-                    <div class="w-auto text-right" id="pressure">10 %</div>
+                    <div class="w-auto font-bold uppercase lg:text-[1rem] md:text-[1rem] sm:text-[1rem] text-[0.7rem]">Pressure</div>
+                    <div class="w-auto text-right lg:text-[1rem] md:text-[1rem] sm:text-[1rem] text-[0.7rem]" id="pressure">-</div>
                   </div>
                   <div class="flex justify-between w-64 mb-4 w-full">
-                    <div class="w-auto font-bold uppercase text-90">Humidity</div>
-                    <div class="w-auto text-right" id="Humidity"></div>
+                    <div class="w-auto font-bold uppercase lg:text-[1rem] md:text-[1rem] sm:text-[1rem] text-[0.7rem]">Humidity</div>
+                    <div class="w-auto text-right lg:text-[1rem] md:text-[1rem] sm:text-[1rem] text-[0.7rem]" id="Humidity">-</div>
                   </div>
-                  <div class="flex justify-between w-64 mb-8 w-full">
-                    <div class="w-auto font-bold uppercase text-90">Wind</div>
-                    <div class="w-auto text-right" id="Wind">12 Mph</div>
+                  <div class="flex justify-between w-64 mb-4 w-full">
+                    <div class="w-auto font-bold uppercase  lg:text-[1rem] md:text-[1rem] sm:text-[1rem] text-[0.7rem]">Wind Speed</div>
+                    <div class="w-auto text-right lg:text-[1rem] md:text-[1rem] sm:text-[1rem] text-[0.7rem]" id="Wind">-</div>
                   </div>
-                  <div class="flex flex-row">
-                    <div class="flex flex-col w-1/4 bg-gray-100 text-black rounded-lg pb-4">
-                      <div class="text-center pt-2 mb-2">
-                       
-                      </div>
-                      <div class="text-center">
-                        <b class="font-normal apiDay"></b><br>
-                        <strong class="text-xl tempreature"></strong>
-                      </div>
-                    </div>
-                    <div
-                      class="weatherTime ml-6 bg-blue-400 h-[16vh] w-[12vw] rounded-md flex items-center justify-center">
-                      <h1 class="text-[1.6rem]">Weather Time</h1>
-                    </div>
+                  <div class="flex justify-between  w-64 mb-4 w-full">
+                    <div class="w-auto font-bold uppercase  lg:text-[1rem] md:text-[1rem] sm:text-[1rem] text-[0.7rem]">Wind Deg.</div>
+                    <div class="w-auto text-right lg:text-[1rem] md:text-[1rem] sm:text-[1rem] text-[0.7rem]" id="windDeg">-</div>
+                  </div>
+                  <div class="flex justify-between w-64 mb-4 w-full">
+                    <div class="w-auto font-bold uppercase lg:text-[1rem] md:text-[1rem] sm:text-[1rem] text-[0.7rem]">Temp Max</div>
+                    <div class="w-auto text-right lg:text-[1rem] md:text-[1rem] sm:text-[1rem] text-[0.7rem]" id="tempMax">-</div>
+                  </div>
+                  <div class="flex justify-between w-64 mb-4 w-full">
+                    <div class="w-auto font-bold uppercase  lg:text-[1rem] md:text-[1rem] sm:text-[ 1rem] text-[0.7rem]">Temp Min</div>
+                    <div class="w-auto text-right lg:text-[1rem] md:text-[1rem] sm:text-[1rem] text-[0.7rem]" id="tempMin">-</div>
+                  </div>
 
+
+                  <div class="flex justify-between w-64 mb-4 w-full">
+                    <div class="w-auto font-bold uppercase hover:text-[1.5rem] hover:transition-all lg:text-[1rem] md:text-[1rem] sm:text-[1rem] text-[0.7rem]">Type</div>
+                    <div class="w-auto text-right lg:text-[1rem] md:text-[1rem] sm:text-[1rem] text-[0.7rem] " id="weatherType2">-</div>
                   </div>
+
+
+
                 </div>
               </div>
             </div>
           </div>
-          <!-- Weather forcasting page -->
+        </div>
+        <!-- Weather forcasting page -->
+
+      </div>
+
+
+
+
+
+
+
+
+      <!-- To-Do-List -->
+      <div class="   toDoList-main-container w-full  rounded-md pageSwitches overflow-hidden h-screen "
+        id="ToDoList">
+        <div class=" main-Container-Header h-14 bg-blue-600 text-white flex border justify-between w-full items-center">
+          <div class="leftHeader logo flex justify-center items-center    h-fit  w-2/4">
+            <img src="./images/Icon/microsoft.png" class="w-20" alt="">
+            <div class=" w-full   ">
+              <h1 class="text-sm" >To Do</h1>
+            </div>
+          </div>
+          <div class=" todoList-search bottom-Header text-black w-2/4 h-full flex items-center  justify-center">
+            <input type="search" id="searchTodo" class="lg:w-96 lg:block md:w-96 md:block sm:block hidden">
+            <div class="lg:hidden md:hidden sm:hidden block text-white"><i class="fa-solid fa-magnifying-glass  "></i></div>
+          </div>
+
+        </div>
+
+
+
+        <div class="toDoList-rightConainer-AddToDo  bg-white w-full h-full  text-black  ">
+          <div class=" contentHeader border-b-2 h-20 flex  items-center p-6">
+            <h1 class="mr-6"><b>My Day</b></h1>
+            <i class="fa-solid fa-sun"></i>
+          </div>
+          <div class="p-3 flex items-center shadow-lg taskField">
+
+            <input type="text" class=" border-none p-2 w-full sm:w-full md:w-full lg:w-full " placeholder="Add a task" id="taskInput">
+            <i class=" mx-2 fa-solid fa-plus cursor-pointer text-xl hover:text-blue-500" id="addTaskButton"></i>
+          </div>
+          <div class="taskStore  p-3 mt-1 flex items-start flex-col overflow-y-scroll scroll-smooth h-80 "
+            id="savedTask">
           
+          </div>
         </div>
       </div>
+      <div id="todoDeleteConfirmation" class="todo-delete-confirmation absolute hidden">
 
-   
+        <div
+          class="flex flex-col justify-center items-center max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 
+          <h1 class=" text-lg font-medium">Are your sure want to delete this Todo?</h1>
+          <div class="mt-5">
+            <button type="button" id="confirmationYes"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Yes</button>
 
+            <button type="button" id="confirmationNo"
+              class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">No.</button>
+          </div>
 
-
-
-    <!-- To-Do-List -->
-    <div class=" hidden  toDoList-main-container w-full  rounded-md pageSwitches overflow-hidden h-screen"
-      id="ToDoList">
-      <div class=" main-Container-Header h-14 bg-blue-600 text-white flex  items-center">
-        <div class="leftHeader logo flex justify-center items-center h-fit  w-1/4">
-          <img src="./images/Icon/microsoft.png" class="w-20" alt="">
-          <h1>To Do</h1>
-        </div>
-        <div class=" todoList-search bottom-Header text-black w-2/4 h-full flex items-center  justify-center">
-          <input type="search" id="searchTodo" class="w-96 rounded-md">
-        </div>
-
-      </div>
-
-
-
-      <div class="toDoList-rightConainer-AddToDo  bg-white w-full h-full  text-black  ">
-        <div class=" contentHeader border-b-2 h-20 flex  items-center p-6">
-          <h1 class="mr-6"><b>My Day</b></h1>
-          <i class="fa-solid fa-sun"></i>
-        </div>
-        <div class="p-3 flex items-center shadow-lg taskField">
-
-          <input type="text" class=" border-none p-2 w-full" placeholder="Add a task" id="taskInput">
-          <i class=" mx-2 fa-solid fa-plus cursor-pointer text-xl hover:text-blue-500" id="addTaskButton"></i>
-        </div>
-        <div class="taskStore p-3 mt-1 flex items-start flex-col overflow-y-scroll scroll-smooth h-80 " id="savedTask">
-
-        </div>
-      </div>
-    </div>
-    <div id="todoDeleteConfirmation" class="todo-delete-confirmation absolute hidden">
-
-      <div
-        class="flex flex-col justify-center items-center max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
-        <h1 class=" text-lg font-medium">Are your sure want to delete this Todo?</h1>
-        <div class="mt-5">
-          <button type="button" id="confirmationYes"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Yes</button>
-
-          <button type="button" id="confirmationNo"
-            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">No.</button>
-        </div>
 
 
 
+        </div>
 
       </div>
 
     </div>
-    </div>
-  </div>
   </section>
 
 
