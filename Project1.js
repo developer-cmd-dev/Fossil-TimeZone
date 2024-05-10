@@ -382,7 +382,7 @@ let removeTodo = () => {
 
 
 
-
+// Search Todo
 let searchTodo = document.getElementById('searchTodo')
 let searchValue = searchTodo.value
 searchTodo.addEventListener('input', () => {
